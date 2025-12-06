@@ -1,20 +1,21 @@
 {
   "name": "install-poetry-project",
-  "version": "1.2.19",
+  "version": "2.1.0",
   "private": true,
   "description": "Install poetry project with cached",
   "main": "dist/index.js",
   "scripts": {
     "format": "prettier -w .",
     "lint": "eslint src/** __tests__/**",
-    "build": "npx esbuild --bundle --platform=node --legal-comments=external --sourcemap=inline --target=node16 ./src/main.ts --outfile=dist/index.js",
+    "build": "npx esbuild --bundle --platform=node --packages=bundle --legal-comments=external --sourcemap=inline --target=node20 ./src/main.ts --outfile=dist/index.js",
     "test": "jest",
     "all": "npm run lint && npm run build",
-    "postinstall": "husky install"
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
-  "packageManager": "yarn@3.5.0",
+  "packageManager": "pnpm@10.5.2",
   "engines": {
-    "node": ">=16.15.0"
+    "node": "^20"
   },
   "lint-staged": {
     "*.{js,ts,yaml,md,yml,json}": "prettier -w"
@@ -35,33 +36,31 @@
   "author": "YourNameOrOrganization",
   "license": "MIT",
   "dependencies": {
-    "@actions/cache": "3.2.1",
-    "@actions/core": "1.10.0",
+    "@actions/cache": "4.0.2",
+    "@actions/core": "1.11.1",
     "@actions/exec": "1.1.1",
-    "@actions/http-client": "2.1.0",
-    "@renovatebot/pep440": "2.1.13"
+    "@actions/http-client": "2.2.3",
+    "@renovatebot/pep440": "4.1.0"
   },
   "devDependencies": {
-    "@types/jest": "29.5.1",
-    "@types/node": "18.16.1",
-    "@typescript-eslint/eslint-plugin": "5.59.1",
-    "@typescript-eslint/parser": "5.59.1",
-    "esbuild": "0.17.18",
-    "eslint": "8.39.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-config-standard": "17.0.0",
-    "eslint-config-standard-with-typescript": "34.0.1",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jest": "27.2.1",
-    "eslint-plugin-n": "15.7.0",
-    "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-standard": "5.0.0",
-    "husky": "8.0.3",
-    "jest": "29.5.0",
-    "jest-circus": "29.5.0",
-    "lint-staged": "13.2.1",
-    "prettier": "2.8.8",
-    "ts-jest": "29.1.0",
-    "typescript": "5.0.4"
+    "@types/jest": "29.5.14",
+    "@types/node": "20.17.22",
+    "@typescript-eslint/eslint-plugin": "8.25.0",
+    "@typescript-eslint/parser": "8.25.0",
+    "esbuild": "0.25.0",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "10.0.2",
+    "eslint-config-standard": "17.1.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jest": "28.11.0",
+    "eslint-plugin-n": "17.15.1",
+    "eslint-plugin-promise": "7.2.1",
+    "husky": "9.1.7",
+    "jest": "29.7.0",
+    "jest-circus": "29.7.0",
+    "lint-staged": "15.4.3",
+    "prettier": "3.5.2",
+    "ts-jest": "29.2.6",
+    "typescript": "5.8.2"
   }
 }

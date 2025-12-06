@@ -3,23 +3,25 @@ name: deploy
 on:
   push:
     tags:
-      - "v1*"
+      - "v2*"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v3
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
-          cache: yarn
+          node-version: "20.18.3"
+          cache: pnpm
 
-      - run: yarn
+      - run: pnpm i
 
-      - run: yarn build
+      - run: pnpm run build
 
       - run: |
           mkdir dist/dist
@@ -29,12 +31,12 @@ jobs:
       - run: echo "TAG=v$(cat package.json | jq .version -r)" >> $GITHUB_ENV
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           commit_message: deploy ${{ github.ref }}
-          publish_branch: dist/v1
+          publish_branch: dist/v2
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
           tag_name: dist/${{ env.TAG }}

@@ -32,19 +32,32 @@ test("get poetry version", async () => {
 });
 
 test("get install without --remove-untracked args", async () => {
-  shouldReturnPoetryVersion = "1.0.5";
+  shouldReturnPoetryVersion = "1.8.4";
   await poetry.install(["e1"], ["--another"]);
-  expect(mockFn).toBeCalledWith("poetry", ["install", "-E", "e1", "--another"]);
-});
-
-test("get install with --remove-untracked args", async () => {
-  await poetry.install(["e1"], ["--another"]);
-  expect(mockFn).toBeCalledWith("poetry", [
+  expect(mockFn).toHaveBeenCalledWith("poetry", [
     "install",
+    "--sync",
     "-E",
     "e1",
     "--another",
+  ]);
+});
+
+test("get install with sync command", async () => {
+  shouldReturnPoetryVersion = "2.0.1";
+  await poetry.install([], []);
+  expect(mockFn).toHaveBeenCalledWith("poetry", ["sync"]);
+});
+
+test("get install with --remove-untracked args", async () => {
+  shouldReturnPoetryVersion = "1.1.1";
+  await poetry.install(["e1"], ["--another"]);
+  expect(mockFn).toHaveBeenCalledWith("poetry", [
+    "install",
     "--remove-untracked",
+    "-E",
+    "e1",
+    "--another",
   ]);
 });
 

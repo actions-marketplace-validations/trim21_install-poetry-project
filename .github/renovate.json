@@ -9,5 +9,11 @@
   "poetry": {
     "enabled": false
   },
-  "updateNotScheduled": false
+  "updateNotScheduled": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": "major",
+      "automerge": false
+    }
+  ]
 }

@@ -16,8 +16,8 @@ function cacheKeyComponents(
 
   const hashed = [
     os.platform() + os.arch() + os.release() + pyVersion,
-    fs.readFileSync("poetry.lock").toString(),
-    fs.readFileSync("pyproject.toml").toString(),
+    tryReadFile("poetry.lock"),
+    fs.readFileSync("pyproject.toml", "utf-8"),
   ];
 
   if (extras.length !== 0) {
@@ -33,6 +33,18 @@ function cacheKeyComponents(
   }
 
   return [...keys, ...hashed.map((s) => hashString(s))];
+}
+
+function tryReadFile(p: string): string {
+  try {
+    return fs.readFileSync(p, "utf-8");
+  } catch (err: unknown) {
+    // @ts-expect-error ignore file not found
+    if (err.code !== "ENOENT") {
+      throw err;
+    }
+    return "";
+  }
 }
 
 // fallback to same python/os/arch version's cache

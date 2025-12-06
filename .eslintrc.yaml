@@ -1,5 +1,4 @@
 extends:
-  - standard-with-typescript
   - plugin:import/recommended
   - plugin:import/typescript # this line does the trick
   - prettier
@@ -7,7 +6,6 @@ extends:
 plugins:
   - import
   - promise
-  - standard
   - "@typescript-eslint"
   - jest
 

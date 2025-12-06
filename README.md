@@ -4,7 +4,7 @@
 
 This action install poetry deps to `.venv`, and enable virtualenv environment.
 
-virtualenv environment directory `.venv` is cache.
+virtualenv environment `.venv` will be cached based on `pyproject.toml` and `poetry.lock`(if exist)
 
 ```yaml
 - uses: actions/checkout@v3
@@ -13,9 +13,9 @@ virtualenv environment directory `.venv` is cache.
   with:
     python-version: 3.7
 
-- uses: Trim21/setup-poetry@dist/v1
+- uses: Trim21/setup-poetry@dist/v2
 
-- uses: Trim21/install-poetry-project@dist/v1
+- uses: Trim21/install-poetry-project@dist/v2
   with:
     # extras arguments passed to poetry command
     # And you don't need to add --sync args, it will be added automatically

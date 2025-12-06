@@ -27,6 +27,7 @@ export function hashString(s: string): string {
 }
 
 export function enableVenv(): void {
+  core.info("Enabling virtualenv");
   if (process.platform === "linux" || process.platform === "darwin") {
     core.addPath(path.join(IN_PROJECT_VENV_PATH, "bin"));
   } else if (process.platform === "win32") {
